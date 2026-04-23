@@ -21,6 +21,10 @@ public class Main {
         //Menu Items
         menu.put("taco", new MenuItem("Taco", 2.50, 3));
         menu.put("burrito", new MenuItem("Burrito", 6.00, 8));
+        menu.put("quesadilla", new MenuItem("Quesadilla", 9.00, 2));
+        menu.put("pupusa", new MenuItem("Pupusa", 3.00, 6));
+        menu.put("nachos", new MenuItem("Nachos", 8.00, 4));
+        menu.put("pozole", new MenuItem("Pozole", 12.00, 4));
         menu.put("soda", new MenuItem("Soda", 1.50, 1));
 
         Order order = new Order(rand.nextInt(100, 500));
