@@ -1,6 +1,9 @@
-// Chase Batchelor
-// CPSC-39
-// This file stores items in an order, and operations regarding order number, total price, and prep time.
+/* 
+* Chase Batchelor
+* CPSC-39
+* Represents a customer's order and acts as a controller between the user interface, and data structures.
+* It uses a linked list to store items and an ArrayList to maintain order history across sessions.
+*/
 
 import java.util.ArrayList;
 
@@ -8,48 +11,73 @@ public class Order {
     
     private int orderNumber;
     private OrderLinkedList items;
+    
+    // Data Structure #1 ArrayList (Order History Storage)
+    private static ArrayList<Order> orderHistory = new ArrayList<>();
 
     public Order(int orderNumber) {
         this.orderNumber = orderNumber;
-        this.items = new ArrayList<>();
+        this.items = new OrderLinkedList();
     }
 
-    public void addItem(MenuItem item) {
-        items.add(item);
+    public void addItem(MenuItem item, int quantity) {
+        items.addItem(item, quantity);
     }
 
-    public void removeItem(int index) {
-        if (index >= 0 && index < items.size()) {
-            items.remove(index);
+    public void removeItem(String name) {
+        items.removeItem(name);
+    }
+
+   /*
+   * Algorithm #1: Total Calculation (Linked List Iteration)
+   * - Iterates through the linked list and accumulates total cost
+   * - Time Complexity: O(n)
+   */
+
+    public double calculateTotal() {
+        return items.calculateTotal();
+    }
+
+    /*
+    * Algorithm #2: Prep Time Calculation (Linked List Iteration)
+    * - Iterates through all nodes and sums prep times
+    * - Time complexity: O(n)
+    */
+
+    public int calculatePrepTime() {
+        return items.calculatePrepTime();
+    }
+
+    public void displayOrder() {
+        System.out.println("\n========== ORDER ==========");
+        System.out.println("Order #" + orderNumber);
+        items.displayOrder();
+        System.out.println("==========================");
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    /*
+     * Algorithm #3: Order History Storage
+     * - Stores completed order in ArrayList
+     * Time Complexity: O(1)
+     */
+
+    public void completeOrder() {
+        orderHistory.add(this);
+    }
+
+    public static void displayOrderHistory() {
+        System.out.println("\n--- ORDER HISTORY ---");
+    
+        for (Order o : orderHistory) {
+            System.out.println("Order #" + o.getOrderNumber() + " | Total: $" + o.calculateTotal() + " | Time: " + o.calculatePrepTime() + " mins");
         }
-   }
-
-   public double calculateTotal() {
-    double total = 0;
-    for (MenuItem item : items) {
-        total += item.getPrice();
     }
-    return total;
-   }
 
-   public int calculatePrepTime() {
-    int time = 0;
-    for (MenuItem item : items) {
-        time += item.getPrepTime();
+    public void updateItem(String name, int quantity) {
+        items.updateItem(name, quantity);
     }
-    return time;
-   }
-
-   public void displayOrder() {
-    System.out.println("Order #" + orderNumber);
-    for (int i = 0; i < items.size(); i++) {
-        System.out.println((i + 1) + ". " + items.get(i));
-    }
-    System.out.println("Total: $" + calculateTotal());
-    System.out.println("Estimated Time: " + calculatePrepTime() + " minutes");
-   }
-
-   public int getOrderNumber() {
-    return orderNumber;
-   }
 }
