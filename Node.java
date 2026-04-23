@@ -1,6 +1,9 @@
-// Chase Batchelor
-// CPSC-39
-// This file stores a MenuItem, quantity, and points to the next node.
+/* 
+* Chase Batchelor
+* CPSC-39
+* Represents a single node in a linked list, storing a MenuItem, its quantity, and a reference to the next node.
+* Used internally by OrderLinkedList to build the custom linked list stucture.
+*/
 
 public class Node {
     private MenuItem item;
