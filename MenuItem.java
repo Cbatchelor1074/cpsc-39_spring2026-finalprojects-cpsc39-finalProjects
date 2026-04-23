@@ -1,6 +1,10 @@
-// Chase Batchelor
-// CPSC-39
-// This file handles items on the menu and its attributes such as name, price and prep time.
+/* 
+* Chase Batchelor
+* CPSC-39
+* Represents a single menu item in the restaurant ordering system.
+* It stores items' names, prices, and preparation times.
+* This class is used as a simple data model throughout the ordering system.
+*/
 
 public class MenuItem {
     private String name;
